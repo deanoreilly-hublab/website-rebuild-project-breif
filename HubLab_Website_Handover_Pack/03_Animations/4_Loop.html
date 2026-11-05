@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animation 4: The loop, every cycle</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+@property --c{syntax:'<integer>';inherits:false;initial-value:0}
+@keyframes hl-travel{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes hl-loop-node{0%{border-color:#22324B;color:#AEB6C2;background:#0A1628}2%,20%{border-color:#D4AF37;color:#F5F3ED;background:#101E34}26%,100%{border-color:#22324B;color:#AEB6C2;background:#0A1628}}
+@keyframes hl-loop-sign{0%,74%{color:#8F98A6}76%,96%{color:#F5F3ED}100%{color:#8F98A6}}
+@keyframes hl-cycles{0%{--c:0}100%{--c:0}}
+@keyframes hl-record-pulse{0%,96%{border-color:#22324B}98%,100%{border-color:#F5F3ED}}
+.hl-traveller{offset-path:path("M 220 10 A 210 210 0 1 1 219.9 10");animation:hl-travel 12s linear infinite}
+.hl-loop-node{animation:hl-loop-node 12s linear infinite}
+.hl-loop-sign{animation:hl-loop-sign 12s linear infinite}
+.hl-record{animation:hl-record-pulse 12s linear infinite}
+@media (prefers-reduced-motion:reduce){.hl-traveller,.hl-loop-node,.hl-loop-sign,.hl-record{animation:none}.hl-traveller{opacity:0}}
+</style>
+</head>
+<body>
+<div style="width: 1200px; height: 720px; box-sizing: border-box; padding: 48px 56px; background: #0A1628; color: #F5F3ED; font-family: var(--font-body); display: grid; grid-template-columns: 520px 1fr; gap: 64px; align-items: center; overflow: hidden">
+
+  <div role="img" aria-label="A loop of four steps: read the rules, map the obligations, decide, a person signs off. A marker travels around the loop and each step lights as it passes. The record sits in the centre." style="position: relative; width: 440px; height: 440px; justify-self: center">
+    <div aria-hidden="true" style="position: absolute; inset: 10px; border: 1px dashed #22324B; border-radius: 50%"></div>
+    <div class="hl-traveller" aria-hidden="true" style="position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; background: #D4AF37"></div>
+
+    <div class="hl-record" style="position: absolute; left: 110px; top: 110px; width: 220px; height: 220px; border-radius: 50%; border: 1px solid #22324B; background: #13233C; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px">
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 22px; line-height: 1; color: #F5F3ED">The record</span>
+      <span style="font-size: 13px; line-height: 1.45; color: #AEB6C2">Same input, same answer, every time.</span>
+    </div>
+
+    <div class="hl-loop-node" style="animation-delay: 0s; position: absolute; left: 220px; top: 10px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Read the rules</div>
+    <div class="hl-loop-node" style="animation-delay: 3s; position: absolute; left: 430px; top: 220px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Map the obligations</div>
+    <div class="hl-loop-node" style="animation-delay: 6s; position: absolute; left: 220px; top: 430px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Decide, deterministically</div>
+    <div class="hl-loop-node" style="animation-delay: 9s; position: absolute; left: 10px; top: 220px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">A person signs off</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+    <div class="hl-eyebrow">Every cycle</div>
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 40px; line-height: 1.05; letter-spacing: -0.015em; color: #F5F3ED; text-wrap: pretty">Continuous, not point in time.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2; max-width: 30em">The rules are written. Someone has to read them, every cycle. A review lands once and the rules change the week after. The engine reads them again every pay run, every application, every claim, and a person signs off each finding before it is acted on.</p>
+    <dl style="margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid #22324B; padding-top: 20px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <dt style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A review</dt>
+        <dd style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #AEB6C2">Once, on the day it was done.</dd>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <dt class="hl-loop-sign" style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">The record</dt>
+        <dd style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #F5F3ED">Every cycle, with the clause and the signature.</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+</body>
+</html>

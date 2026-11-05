@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animation 3: Proof cards, the record builds</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+@property --d{syntax:'<integer>';inherits:false;initial-value:188}
+@property --m{syntax:'<integer>';inherits:false;initial-value:0}
+@keyframes hl-row-in{0%,2%{opacity:0;transform:translateY(6px)}8%,86%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(0)}}
+@keyframes hl-tick-in{0%,6%{opacity:0}10%,86%{opacity:1}92%,100%{opacity:0}}
+@keyframes hl-mapped{0%,8%{--m:0}14%{--m:1}26%{--m:2}38%{--m:3}50%{--m:4}62%{--m:5}74%,86%{--m:6}92%,100%{--m:0}}
+@keyframes hl-bar{0%,12%{width:100%}62%,88%{width:4.3%}100%{width:100%}}
+@keyframes hl-days{0%,12%{--d:188}62%,88%{--d:8}100%{--d:188}}
+@keyframes hl-box-in{0%,4%{background:#0A1628;border-color:#22324B}10%,84%{background:#F5F3ED;border-color:#F5F3ED}90%,100%{background:#0A1628;border-color:#22324B}}
+@keyframes hl-box-tick{0%,8%{opacity:0}12%,84%{opacity:1}90%,100%{opacity:0}}
+@keyframes hl-cert{0%,70%{opacity:0;border-color:#22324B}76%,86%{opacity:1;border-color:#D4AF37}92%,100%{opacity:0;border-color:#22324B}}
+.hl-row{animation:hl-row-in 10s linear infinite}
+.hl-tick{animation:hl-tick-in 10s linear infinite}
+.hl-mapped{--m:0;counter-reset:m var(--m);animation:hl-mapped 10s linear infinite}
+.hl-mapped::before{content:counter(m)}
+.hl-bar{animation:hl-bar 8s cubic-bezier(.4,0,.2,1) infinite}
+.hl-days{--d:188;counter-reset:d var(--d);animation:hl-days 8s cubic-bezier(.4,0,.2,1) infinite}
+.hl-days::before{content:counter(d)}
+.hl-box{animation:hl-box-in 10s linear infinite}
+.hl-box-tick{animation:hl-box-tick 10s linear infinite}
+.hl-cert{animation:hl-cert 10s linear infinite}
+@media (prefers-reduced-motion:reduce){.hl-row,.hl-tick,.hl-mapped,.hl-bar,.hl-days,.hl-box,.hl-box-tick,.hl-cert{animation:none}.hl-mapped{--m:6}.hl-bar{width:4.3%}.hl-days{--d:8}.hl-box{background:#F5F3ED;border-color:#F5F3ED}.hl-cert{opacity:1;border-color:#D4AF37}}
+</style>
+</head>
+<body>
+<div style="width: 1200px; height: 720px; box-sizing: border-box; padding: 48px 56px; background: #0A1628; color: #F5F3ED; font-family: var(--font-body); display: flex; flex-direction: column; gap: 28px; overflow: hidden">
+
+  <div style="display: flex; flex-direction: column; gap: 12px">
+    <div class="hl-eyebrow">Not a roadmap. A record.</div>
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 30px; line-height: 1.1; color: #F5F3ED">Discovery, build, licence. Each one leaves a record.</h2>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; flex: 1">
+
+    <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid #22324B; padding: 24px; background: #101E34">
+      <div style="min-height: 236px; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #22324B">
+        <div class="hl-row" style="animation-delay: 0s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Overtime after 38 hours</span><span class="hl-tick" style="animation-delay: 0s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div class="hl-row" style="animation-delay: 1.2s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Weekend penalty rates</span><span class="hl-tick" style="animation-delay: 1.2s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div class="hl-row" style="animation-delay: 2.4s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Minimum engagement, casuals</span><span class="hl-tick" style="animation-delay: 2.4s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div class="hl-row" style="animation-delay: 3.6s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Allowances: first aid, meal</span><span class="hl-tick" style="animation-delay: 3.6s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div class="hl-row" style="animation-delay: 4.8s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Annual leave loading</span><span class="hl-tick" style="animation-delay: 4.8s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div class="hl-row" style="animation-delay: 6s; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; line-height: 1.4; border-bottom: 1px solid #22324B; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2; opacity: 0"><span>Public holiday rates</span><span class="hl-tick" style="animation-delay: 6s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+        <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6"><span>Obligations mapped to your roster</span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; color: #F5F3ED; font-feature-settings: 'lnum' 1"><span class="hl-mapped"></span></span></div>
+      </div>
+      <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+      <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #F5F3ED">Discovery</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #C3C9D2">In weeks, not months. The real problem, found in your data against the rules that apply to it.</p>
+    </article>
+
+    <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid #22324B; padding: 24px; background: #101E34">
+      <div style="height: 236px; display: flex; flex-direction: column; gap: 22px; border-top: 1px solid #22324B; padding-top: 20px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6"><span>Planning permit, by hand</span><span style="font-feature-settings: 'lnum' 1">188 days</span></div>
+          <div style="height: 14px; background: #1D2C45; width: 100%"></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #F5F3ED"><span>On the engine</span><span style="font-feature-settings: 'lnum' 1"><span class="hl-days"></span> days</span></div>
+          <div style="height: 14px; background: #1D2C45; width: 100%; position: relative"><div class="hl-bar" style="position: absolute; left: 0; top: 0; height: 14px; background: #F5F3ED; width: 100%"></div></div>
+        </div>
+        <p style="margin: auto 0 0; font-size: 14px; line-height: 1.5; color: #AEB6C2">Lancaster, California. Same engine, different rules.</p>
+      </div>
+      <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+      <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #F5F3ED">Build</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #C3C9D2">A working prototype you can touch, and a measured result before anything further is committed.</p>
+    </article>
+
+    <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid #22324B; padding: 24px; background: #101E34">
+      <div style="height: 236px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #22324B; padding-top: 16px; position: relative">
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2"><span class="hl-box" style="animation-delay: 0s; position: relative; width: 14px; height: 14px; border: 1px solid #22324B; box-sizing: border-box; flex: none"><svg class="hl-box-tick" style="animation-delay: 0s; position: absolute; inset: 1px; opacity: 0" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="#0A1628" stroke-width="1.5"/></svg></span>Shifts checked against the award</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2"><span class="hl-box" style="animation-delay: 1.4s; position: relative; width: 14px; height: 14px; border: 1px solid #22324B; box-sizing: border-box; flex: none"><svg class="hl-box-tick" style="animation-delay: 1.4s; position: absolute; inset: 1px; opacity: 0" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="#0A1628" stroke-width="1.5"/></svg></span>Exceptions listed with the clause</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2"><span class="hl-box" style="animation-delay: 2.8s; position: relative; width: 14px; height: 14px; border: 1px solid #22324B; box-sizing: border-box; flex: none"><svg class="hl-box-tick" style="animation-delay: 2.8s; position: absolute; inset: 1px; opacity: 0" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="#0A1628" stroke-width="1.5"/></svg></span>Finding reviewed by a person</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2"><span class="hl-box" style="animation-delay: 4.2s; position: relative; width: 14px; height: 14px; border: 1px solid #22324B; box-sizing: border-box; flex: none"><svg class="hl-box-tick" style="animation-delay: 4.2s; position: absolute; inset: 1px; opacity: 0" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="#0A1628" stroke-width="1.5"/></svg></span>Signed off</div>
+        <div style="display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #C3C9D2"><span class="hl-box" style="animation-delay: 5.6s; position: relative; width: 14px; height: 14px; border: 1px solid #22324B; box-sizing: border-box; flex: none"><svg class="hl-box-tick" style="animation-delay: 5.6s; position: absolute; inset: 1px; opacity: 0" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="#0A1628" stroke-width="1.5"/></svg></span>Record kept, insurer behind it</div>
+        <div class="hl-cert" style="margin-top: auto; align-self: flex-start; border: 1px solid #22324B; padding: 8px 12px; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 15px; color: #F5F3ED; opacity: 0">Pay run certified before it locks</div>
+      </div>
+      <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+      <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #F5F3ED">Licence</h3>
+      <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #C3C9D2">Live production, hosted in Australia, segregated per customer. CERTAiNTY certifies every pay run, and insurance stands behind the result.</p>
+    </article>
+
+  </div>
+</div>
+
+</body>
+</html>

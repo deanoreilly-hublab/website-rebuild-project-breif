@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HubLab homepage, direction C: One engine, many domains</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+a{color:#F5F3ED}a:hover{color:#E9D58E}
+</style>
+</head>
+<body>
+<div id="top" style="font-family: var(--font-body); color: #F5F3ED; background: #0A1628; display: flex; flex-direction: column; width: 100%; min-width: 0">
+
+<header style="border-bottom: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+    <a href="#top" style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 24px; line-height: 1; color: #F5F3ED; text-decoration: none">HubLab</a>
+    <nav aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500">
+      <a href="#sectors" style="color: #C3C9D2; text-decoration: none">Sectors</a>
+      <a href="#usecases" style="color: #C3C9D2; text-decoration: none">Use cases</a>
+      <a href="#roles" style="color: #C3C9D2; text-decoration: none">By role</a>
+      <a href="#record" style="color: #C3C9D2; text-decoration: none">The record</a>
+      <a href="#contact" style="color: #C3C9D2; text-decoration: none">Contact</a>
+    </nav>
+    <a class="hl-btn hl-btn-ghost" href="#contact">Start a conversation</a>
+  </div>
+</header>
+
+<section style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 120px clamp(20px, 5vw, 64px) 96px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start">
+  <div class="hl-eyebrow">Australia's regulatory intelligence layer</div>
+  <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(44px, 6.5vw, 88px); line-height: 1.02; letter-spacing: -0.02em; color: #F5F3ED; max-width: 11em; text-wrap: pretty">One engine, many domains.</h1>
+  <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+  <p style="margin: 0; font-size: 20px; line-height: 1.55; color: #C3C9D2; max-width: 34em">Definitive AI as a capability. The same engine reads a Modern Award, a planning scheme or a funding rule the way your specialists do, at scale, and a person signs off every finding. Wherever the gap between your systems and your obligations creates risk, that is where we work.</p>
+  <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center">
+    <a class="hl-btn" href="#contact">Start a conversation</a>
+    <a class="hl-btn hl-btn-ghost" href="#sectors">Find your sector</a>
+  </div>
+</section>
+
+<section id="sectors" style="border-top: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 720px">
+      <div class="hl-eyebrow">Where the rules live</div>
+      <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.02; letter-spacing: -0.015em; color: #F5F3ED">Four sectors. One way of working.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 0; border-top: 1px solid #22324B; border-left: 1px solid #22324B">
+      <article style="display: flex; flex-direction: column; gap: 16px; padding: 40px; border-right: 1px solid #22324B; border-bottom: 1px solid #22324B">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Wealth and superannuation</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">Product, disclosure and remediation obligations change faster than a fund can re-read them. The engine maps each obligation to the members, products and advisers it touches, and keeps the record a regulator can follow.</p>
+        <p style="margin: 0; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">For the CFO and the board</p>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 16px; padding: 40px; border-right: 1px solid #22324B; border-bottom: 1px solid #22324B">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Government</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">The rules are written. Someone has to read them, every cycle. Planning, grants and service delivery all turn on an assessment a specialist makes by hand. Planning permits in Lancaster, California went from 188 days to 8 on the same engine.</p>
+        <p style="margin: 0; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">For the secretary and the CFO</p>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 16px; padding: 40px; border-right: 1px solid #22324B; border-bottom: 1px solid #22324B">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Technology and platforms</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">A global business carries Australian workforce, contractor, privacy and safety obligations that the head office does not read. We sit above the systems you run, hosted in Australia, segregated per customer. No rip and replace.</p>
+        <p style="margin: 0; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">For the regional CFO and the CIO</p>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 16px; padding: 40px; border-right: 1px solid #22324B; border-bottom: 1px solid #22324B">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Enterprise</h3>
+        <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">Payroll-heavy businesses in facilities, hospitality and healthcare carry the sharpest exposure. 80,000+ shifts validated in live production for a national facilities services group, across 4,000+ employees, with 120+ Modern Awards ingested.</p>
+        <p style="margin: 0; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">For the CFO and the payroll lead</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="usecases" class="on-cream" style="background: #F5F3ED; color: #0A1628">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 720px">
+      <div class="hl-eyebrow" style="color:var(--hl-text-faint-on-cream)">Not a roadmap. A record.</div>
+      <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; color: #0A1628">What the engine is reading today.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    </div>
+    <div style="display: flex; flex-direction: column; border-top: 1px solid #E5E7EB">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px 32px; padding: 24px 0; border-bottom: 1px solid #E5E7EB; align-items: baseline">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #0A1628">Payroll assurance</span>
+        <span style="font-size: 17px; line-height: 1.6; color: #1F2937">CERTAiNTY, the first insurance-backed payroll assurance in Australia. Certifies every pay run before it locks.</span>
+        <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #3A4250">Live production</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px 32px; padding: 24px 0; border-bottom: 1px solid #E5E7EB; align-items: baseline">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #0A1628">Planning permits</span>
+        <span style="font-size: 17px; line-height: 1.6; color: #1F2937">188 days to 8 in Lancaster, California, on the same engine. Australian planning schemes next.</span>
+        <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #3A4250">Proven on the engine</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px 32px; padding: 24px 0; border-bottom: 1px solid #E5E7EB; align-items: baseline">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #0A1628">NDIS service delivery</span>
+        <span style="font-size: 17px; line-height: 1.6; color: #1F2937">Pricing arrangements and support rules applied to each claim before it is submitted.</span>
+        <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #3A4250">In development</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 16px 32px; padding: 24px 0; border-bottom: 1px solid #E5E7EB; align-items: baseline">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #0A1628">Grant allocation</span>
+        <span style="font-size: 17px; line-height: 1.6; color: #1F2937">Eligibility and acquittal rules read once, applied to every application, with the clause behind each decision.</span>
+        <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #3A4250">In development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roles" style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 48px">
+  <div style="display: flex; flex-direction: column; gap: 24px; max-width: 720px">
+    <div class="hl-eyebrow">By role</div>
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; color: #F5F3ED">What this means for the person who signs.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 32px 64px">
+    <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">CFO</div><div class="hl-card-body">CERTAiNTY certifies every pay run before it locks, and insurance stands behind the result.</div></div>
+    <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">Board director</div><div class="hl-card-body">Same input, same answer, every time, with the clause that made it. That is a record a regulator can follow.</div></div>
+    <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">CIO</div><div class="hl-card-body">We sit above the systems you run. No rip and replace. Hosted in Australia, segregated per customer.</div></div>
+    <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">Secretary or agency head</div><div class="hl-card-body">The rules are written. Someone has to read them, every cycle. We read them the way your specialists do, at scale.</div></div>
+  </div>
+</section>
+
+<section class="hl-record" id="record"><div class="hl-eyebrow" style="color:var(--hl-text-faint-on-cream)">Not a roadmap. A record.</div><div class="hl-record-figure">4,000+</div><div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div><p class="hl-record-caption">Employees whose pay is validated in live production for a national facilities services group, across 80,000+ shifts and 120+ Modern Awards.</p><p class="hl-record-body">Three parties, one accountable: the engine (Labrynth), the layer (HubLab) and you. Local team. Global engine.</p></section>
+
+<section id="contact" style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 120px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 32px">
+  <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.02; letter-spacing: -0.015em; color: #F5F3ED; max-width: 16em; text-wrap: pretty">Tell us which rule your sector reads by hand.</h2>
+  <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+  <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2; max-width: 62ch">Discovery in weeks, a working prototype you can touch, and a measured result before anything further is committed.</p>
+  <a class="hl-btn" href="mailto:enquiries@hublab.com.au">Start a conversation</a>
+</section>
+
+<footer style="border-top: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 24px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">
+    <span>HubLab Pty Ltd · ABN 11 682 982 592 · Camberwell VIC 3124</span>
+    <span>enquiries@hublab.com.au</span>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>

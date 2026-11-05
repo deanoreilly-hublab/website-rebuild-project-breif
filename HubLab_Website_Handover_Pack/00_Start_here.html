@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HubLab website handover pack</title>
+<link rel="icon" href="05_Brand_assets/favicons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+:root{--navy:#0A1628;--ink:#1F2937;--muted:#3A4250;--faint:#6B7280;--rule:#E5E7EB;--gold:#D4AF37;--panel:#F5F3ED}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6}
+.top{background:var(--navy);color:#F5F3ED}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(20px,4vw)}
+.top .wrap{padding-block:56px 64px;display:flex;flex-direction:column;gap:20px}
+.lock{display:flex;align-items:center;gap:14px}
+.lock img{height:40px;width:auto}
+h1,h2,h3{font-family:"Archivo",Arial,Helvetica,sans-serif;font-weight:600;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,4.2vw,52px);font-stretch:104%;line-height:1.02;letter-spacing:-.015em;max-width:16em}
+h2{font-size:clamp(24px,2.4vw,30px);font-stretch:104%;line-height:1.15;color:var(--navy)}
+h3{font-size:19px;font-stretch:102%;color:var(--navy)}
+.rule{height:2px;width:88px;background:var(--gold)}
+.lead{font-size:20px;line-height:1.55;color:#C3C9D2;max-width:36em;margin:0}
+.eyebrow{font-family:"Archivo",Arial,sans-serif;font-size:13px;font-weight:500;letter-spacing:.02em;color:#8F98A6}
+section{padding-block:56px;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+section>.wrap{display:flex;flex-direction:column;gap:24px}
+p{margin:0;max-width:66ch}
+a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px}
+a:hover{color:#BE9A2C}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:28px}
+.item{display:flex;flex-direction:column;gap:10px;min-width:0}
+.thumb{display:block;aspect-ratio:16/10;overflow:hidden;border:1px solid var(--rule);background:var(--panel)}
+.thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.tag{font-family:"Archivo",Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--muted)}
+.tag.now{color:var(--navy)}
+.small{font-size:15px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:15.5px}
+th,td{text-align:left;vertical-align:top;padding:12px 16px 12px 0;border-top:1px solid var(--rule)}
+th{font-family:"Archivo",Arial,sans-serif;font-size:13px;font-weight:600;color:var(--navy)}
+td:first-child{white-space:nowrap}
+.tablebox{overflow-x:auto}
+ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;max-width:70ch}
+.note{background:var(--panel);border-top:2px solid var(--gold);padding:16px 20px;font-size:15.5px;color:var(--muted)}
+footer{border-top:1px solid var(--rule);padding-block:24px;font-family:"Archivo",Arial,sans-serif;font-size:13px;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="lock"><img src="05_Brand_assets/logos/lockup-on-navy.svg" alt="HubLab"></div>
+    <span class="eyebrow">Website handover pack · 5 November 2026</span>
+    <h1>Everything we have made so far, and what we are looking for.</h1>
+    <div class="rule"></div>
+    <p class="lead">Start with the project brief, then open the current build in your browser. Everything else in this pack is reference: the animations on their own, the five earlier directions we explored, the design system, the logos and the approved words.</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <h2>Read in this order</h2>
+    <ol class="steps">
+      <li><a href="01_Brief/HubLab_website_project_brief.pdf">The project brief</a> (also as <a href="01_Brief/HubLab_website_project_brief.docx">Word</a>): scope, audience, site map, design rules, open items.</li>
+      <li><a href="02_Current_build/index.html">The current build</a>: the homepage as it should look and behave. Open it in Chrome, Safari or Edge with an internet connection so the fonts load. Try the Dark and Light buttons, the menu dropdowns, and a phone-width window.</li>
+      <li><a href="07_Approved_copy/HubLab_approved_copy.pdf">The approved copy</a>: the only words the site may use.</li>
+      <li><a href="06_Design_system/README.md">The design system</a> and <a href="05_Brand_assets/logos/">the logos</a>.</li>
+      <li>The animations and earlier versions below, for reference.</li>
+    </ol>
+    <div class="note">Where anything in this pack disagrees, this order decides: the brief, then the current build, then the design system. The earlier versions are superseded and are here only to show what we tried.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The current build</h2>
+    <p>One page holding every component, both themes, the locked header with dropdowns, and all five animations. Build every other page from these parts.</p>
+    <div class="grid">
+      <div class="item"><a class="thumb" href="02_Current_build/previews/desktop_dark.jpg"><img src="02_Current_build/previews/desktop_dark.jpg" alt="Current build, desktop, dark theme"></a><span class="tag now">Desktop, dark</span></div>
+      <div class="item"><a class="thumb" href="02_Current_build/previews/desktop_light.jpg"><img src="02_Current_build/previews/desktop_light.jpg" alt="Current build, desktop, light theme"></a><span class="tag now">Desktop, light</span></div>
+      <div class="item"><a class="thumb" href="02_Current_build/previews/phone_dark.jpg"><img src="02_Current_build/previews/phone_dark.jpg" alt="Current build, phone, dark theme"></a><span class="tag now">Phone, dark</span></div>
+      <div class="item"><a class="thumb" href="02_Current_build/previews/phone_light.jpg"><img src="02_Current_build/previews/phone_light.jpg" alt="Current build, phone, light theme"></a><span class="tag now">Phone, light</span></div>
+    </div>
+    <p class="small"><a href="02_Current_build/index.html">Open the live page</a>. The images are full-length captures; click one to see it whole.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>The five animations</h2>
+    <p>Each one on its own page, looping. All are plain CSS, settle on their last frame when the reader has reduced motion turned on, and appear in the current build in their final form.</p>
+    <div class="grid">
+      <div class="item"><a class="thumb" href="03_Animations/1_Hero_flow.html"><img src="03_Animations/previews/1_Hero_flow.jpg" alt="Hero flow animation"></a><h3>1. Hero flow</h3><p class="small">A rule change enters, HubLab reads, maps and decides, a person signs off, the record comes out.</p></div>
+      <div class="item"><a class="thumb" href="03_Animations/2_Orbit.html"><img src="03_Animations/previews/2_Orbit.jpg" alt="Orbit animation"></a><h3>2. Orbit</h3><p class="small">Labrynth at the core, HubLab on the middle ring, your systems on the outside, signals in and back.</p></div>
+      <div class="item"><a class="thumb" href="03_Animations/3_Proof_cards.html"><img src="03_Animations/previews/3_Proof_cards.jpg" alt="Proof cards animation"></a><h3>3. Proof cards</h3><p class="small">Discovery, build, licence, each card showing its record build up.</p></div>
+      <div class="item"><a class="thumb" href="03_Animations/4_Loop.html"><img src="03_Animations/previews/4_Loop.jpg" alt="Loop animation"></a><h3>4. Loop</h3><p class="small">Read, map, decide, sign off, every cycle, with the record at the centre.</p></div>
+      <div class="item"><a class="thumb" href="03_Animations/5_Ticker_and_count_ups.html"><img src="03_Animations/previews/5_Ticker_and_count_ups.jpg" alt="Ticker and count-ups"></a><h3>5. Ticker and count-ups</h3><p class="small">What the engine reads and where, scrolling; proof numbers counting up once.</p></div>
+    </div>
+    <p class="small">These single pages are earlier cuts. Where wording or detail differs from the current build (for example the orbit's middle ring), the current build is right.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Earlier versions</h2>
+    <p>Five homepage directions we explored before settling, then the mock that combined them. Superseded: use them for ideas, not for wording or layout.</p>
+    <div class="grid">
+      <div class="item"><a class="thumb" href="04_Earlier_versions/A_The_record.html"><img src="04_Earlier_versions/previews/A_The_record.jpg" alt="Direction A"></a><span class="tag">A. The record</span><p class="small">Editorial, evidence first, proof band early.</p></div>
+      <div class="item"><a class="thumb" href="04_Earlier_versions/B_The_engine.html"><img src="04_Earlier_versions/previews/B_The_engine.jpg" alt="Direction B"></a><span class="tag">B. The engine</span><p class="small">Mechanism led: rule to record in five steps.</p></div>
+      <div class="item"><a class="thumb" href="04_Earlier_versions/C_One_engine_many_domains.html"><img src="04_Earlier_versions/previews/C_One_engine_many_domains.jpg" alt="Direction C"></a><span class="tag">C. One engine, many domains</span><p class="small">Sector navigation for a mixed audience.</p></div>
+      <div class="item"><a class="thumb" href="04_Earlier_versions/D_The_exposure.html"><img src="04_Earlier_versions/previews/D_The_exposure.jpg" alt="Direction D"></a><span class="tag">D. The exposure</span><p class="small">Light ground, director exposure first.</p></div>
+      <div class="item"><a class="thumb" href="04_Earlier_versions/E_Definitive_not_generative.html"><img src="04_Earlier_versions/previews/E_Definitive_not_generative.jpg" alt="Direction E"></a><span class="tag">E. Definitive, not generative</span><p class="small">Positioning against the alternatives.</p></div>
+      <div class="item"><a class="thumb" href="04_Earlier_versions/F_Combined_mock_with_theme_toggle.html"><img src="04_Earlier_versions/previews/F_Combined_mock_with_theme_toggle.jpg" alt="Combined mock"></a><span class="tag">F. Combined mock</span><p class="small">The first page to bring the animations and the theme toggle together.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>References we are looking for</h2>
+    <p>What to take from each, and what not to.</p>
+    <div class="tablebox"><table>
+      <tr><th>Reference</th><th>Take from it</th><th>Do not take</th></tr>
+      <tr><td><a href="https://www.credo.ai/">credo.ai</a></td><td>The motion and page anatomy we adapted: an animated product flow in the hero, a ring diagram that builds, feature cards that animate their own proof, a continuous loop, a scrolling strip under the hero, one call to action repeated down the page</td><td>Their colours, gradients, logos, imagery or wording. Our versions are drawn in HubLab's own system</td></tr>
+      <tr><td><a href="https://www.v2.ai/">v2.ai</a></td><td>The tone: enterprise confidence, restraint, proof before claims, a multi-page site with a page per sector</td><td>Layout or assets</td></tr>
+      <tr><td><a href="https://hublab.com.au/">hublab.com.au</a></td><td>The site being replaced; it shows where we are starting from</td><td>Its wording, which predates the approved copy</td></tr>
+      <tr><td><a href="https://fonts.google.com/specimen/Archivo">Archivo</a> and <a href="https://fonts.google.com/specimen/Source+Serif+4">Source Serif 4</a></td><td>The two typefaces, both free on Google Fonts. Load Archivo with its width axis (62 to 125)</td><td>Substitutes</td></tr>
+      <tr><td><a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a></td><td>The accessibility standard the site must meet, at level AA</td><td></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Live versions</h2>
+    <p>Dean will share these with you; they open once he has. They are the same work as this pack, kept current.</p>
+    <div class="tablebox"><table>
+      <tr><th>What</th><th>Link</th></tr>
+      <tr><td>Current build</td><td><a href="https://claude.ai/artifact/Sn6gTqrPxMAVsKhTzfzZST">claude.ai/artifact/Sn6gTqrPxMAVsKhTzfzZST</a></td></tr>
+      <tr><td>Project brief</td><td><a href="https://claude.ai/artifact/Vfeoe8y2DFQJn7CdrVNNj9">claude.ai/artifact/Vfeoe8y2DFQJn7CdrVNNj9</a></td></tr>
+      <tr><td>Design canvas (all versions side by side)</td><td><a href="https://claude.ai/code/artifact/21545f16-4d5f-4300-a533-a7a1ba5b258f">claude.ai/code/artifact/21545f16-4d5f-4300-a533-a7a1ba5b258f</a></td></tr>
+      <tr><td>Design system</td><td><a href="https://claude.ai/code/artifact/07c606bf-2bec-44aa-a6a5-5fc2a04d28a2">claude.ai/code/artifact/07c606bf-2bec-44aa-a6a5-5fc2a04d28a2</a></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What is in each folder</h2>
+    <div class="tablebox"><table>
+      <tr><th>Folder</th><th>Contents</th></tr>
+      <tr><td>01_Brief</td><td>The project brief as PDF and Word</td></tr>
+      <tr><td>02_Current_build</td><td>index.html, the current homepage, plus full-length previews at desktop and phone widths in both themes</td></tr>
+      <tr><td>03_Animations</td><td>The five animations as single pages, with a still of each</td></tr>
+      <tr><td>04_Earlier_versions</td><td>Directions A to E and the combined mock, with full-length previews</td></tr>
+      <tr><td>05_Brand_assets</td><td>Logo lockups and symbols as SVG for navy and cream grounds, a gold single-ink symbol, an animated logo, and favicons (SVG, 16, 32 and 48px)</td></tr>
+      <tr><td>06_Design_system</td><td>README with the rules, tokens.json and tokens.css, the language register, and the component styles</td></tr>
+      <tr><td>07_Approved_copy</td><td>Press release, public FAQ and language register, as PDF and HTML</td></tr>
+    </table></div>
+    <p class="small">Logo use: lockup on the left of the header, the navy-ground file on dark, the cream-ground file on light, clear space of one bar's height, never redrawn or recoloured. The light theme now sits on white, and the design system was written for cream grounds: use the cream-ground files on white and tell us if anything looks wrong.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">HubLab Pty Ltd · ABN 11 682 982 592 · Camberwell VIC 3124 · Contact: Dean O'Reilly, dean.oreilly@hublab.com.au · Confidential until launch</div></footer>
+</body>
+</html>

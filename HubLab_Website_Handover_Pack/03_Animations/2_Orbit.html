@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animation 2: Orbit, local team and global engine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+@keyframes hl-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes hl-orbit-dot{0%{left:calc(100% - 6px);opacity:0}2%{opacity:1}8%{left:0;opacity:1}9%{opacity:0}10%{left:0;opacity:0}11%{opacity:1}16%{left:calc(100% - 6px);opacity:1}17%,100%{left:calc(100% - 6px);opacity:0}}
+@keyframes hl-orbit-node{0%,1%{border-color:#22324B;color:#AEB6C2;background:#0A1628}3%,16%{border-color:#D4AF37;color:#F5F3ED;background:#101E34}19%,100%{border-color:#22324B;color:#AEB6C2;background:#0A1628}}
+@keyframes hl-core-pulse{0%,44%{background:#13233C}48%,54%{background:#1D2C45}60%,100%{background:#13233C}}
+@keyframes hl-layer-node{0%,2%{border-color:#22324B;color:#AEB6C2}6%,30%{border-color:#F5F3ED;color:#F5F3ED}36%,100%{border-color:#22324B;color:#AEB6C2}}
+.hl-arc{animation:hl-spin 36s linear infinite}
+.hl-arc-rev{animation:hl-spin 54s linear infinite reverse}
+.hl-orbit-dot{animation:hl-orbit-dot 18s linear infinite}
+.hl-orbit-node{animation:hl-orbit-node 18s linear infinite}
+.hl-core{animation:hl-core-pulse 3s linear infinite}
+.hl-layer-node{animation:hl-layer-node 9s linear infinite}
+@media (prefers-reduced-motion:reduce){.hl-arc,.hl-arc-rev,.hl-orbit-dot,.hl-orbit-node,.hl-core,.hl-layer-node{animation:none}.hl-orbit-dot{opacity:0}}
+</style>
+</head>
+<body>
+<div style="width: 1200px; height: 720px; box-sizing: border-box; padding: 48px 56px; background: #0A1628; color: #F5F3ED; font-family: var(--font-body); display: grid; grid-template-columns: 580px 1fr; gap: 48px; align-items: center; overflow: hidden">
+
+  <div role="img" aria-label="Three rings: the systems you run on the outside, the HubLab layer in the middle, the Labrynth engine at the core. Signals travel from each system to the core and back." style="position: relative; width: 580px; height: 580px; justify-self: center">
+    <div aria-hidden="true" style="position: absolute; left: 30px; top: 30px; width: 520px; height: 520px; border: 1px solid #1D2C45; border-radius: 50%; box-sizing: border-box"></div>
+    <div class="hl-arc" aria-hidden="true" style="position: absolute; left: 30px; top: 30px; width: 520px; height: 520px; border: 1px solid transparent; border-top-color: #5A6B86; border-radius: 50%; box-sizing: border-box"></div>
+    <div aria-hidden="true" style="position: absolute; left: 120px; top: 120px; width: 340px; height: 340px; border: 1px solid #1D2C45; border-radius: 50%; box-sizing: border-box"></div>
+    <div class="hl-arc-rev" aria-hidden="true" style="position: absolute; left: 120px; top: 120px; width: 340px; height: 340px; border: 1px solid transparent; border-bottom-color: #5A6B86; border-radius: 50%; box-sizing: border-box"></div>
+
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(-90deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 0s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(-30deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 3s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(30deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 6s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(90deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 9s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(150deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 12s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: #22324B; transform: rotate(210deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 15s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+
+    <div class="hl-core" style="position: absolute; left: 210px; top: 210px; width: 160px; height: 160px; border-radius: 50%; background: #13233C; border: 1px solid #5A6B86; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center">
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 18px; line-height: 1; color: #F5F3ED">Labrynth</span>
+      <span style="font-family: var(--font-ui); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">The engine</span>
+    </div>
+
+    <div class="hl-layer-node" style="animation-delay: 0s; position: absolute; left: 143px; top: 205px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 7px 11px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Discovery</div>
+    <div class="hl-layer-node" style="animation-delay: 3s; position: absolute; left: 437px; top: 205px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 7px 11px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Build</div>
+    <div class="hl-layer-node" style="animation-delay: 6s; position: absolute; left: 290px; top: 460px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 7px 11px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Licence</div>
+
+    <div class="hl-orbit-node" style="animation-delay: 0s; position: absolute; left: 290px; top: 30px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Payroll</div>
+    <div class="hl-orbit-node" style="animation-delay: 3s; position: absolute; left: 515px; top: 160px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Rostering and time</div>
+    <div class="hl-orbit-node" style="animation-delay: 6s; position: absolute; left: 515px; top: 420px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Case management</div>
+    <div class="hl-orbit-node" style="animation-delay: 9s; position: absolute; left: 290px; top: 550px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Finance and ledger</div>
+    <div class="hl-orbit-node" style="animation-delay: 12s; position: absolute; left: 65px; top: 420px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">Records and documents</div>
+    <div class="hl-orbit-node" style="animation-delay: 15s; position: absolute; left: 65px; top: 160px; transform: translate(-50%, -50%); border: 1px solid #22324B; background: #0A1628; padding: 9px 13px; font-family: var(--font-ui); font-size: 14px; font-weight: 500; color: #AEB6C2; white-space: nowrap">HR and contracts</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+    <div class="hl-eyebrow">Three parties, one accountable</div>
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 40px; line-height: 1.05; letter-spacing: -0.015em; color: #F5F3ED">Local team. Global engine.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    <dl style="margin: 0; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #22324B">
+      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #22324B">
+        <dt style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">Outer ring</dt>
+        <dd style="margin: 0; font-size: 16px; line-height: 1.5; color: #C3C9D2">You. The systems you already run stay the systems of record.</dd>
+      </div>
+      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #22324B">
+        <dt style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">Middle ring</dt>
+        <dd style="margin: 0; font-size: 16px; line-height: 1.5; color: #C3C9D2">HubLab, the layer. Discovery, build, licence, with a person signing off every finding.</dd>
+      </div>
+      <div style="display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid #22324B">
+        <dt style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">Core</dt>
+        <dd style="margin: 0; font-size: 16px; line-height: 1.5; color: #C3C9D2">Labrynth, the engine. Built in the United States, proven in government there, exclusive to HubLab in Australia.</dd>
+      </div>
+    </dl>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #AEB6C2">We sit above the systems you run. No rip and replace. Hosted in Australia, segregated per customer.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="HubLab">
+  <rect width="64" height="64" rx="12" fill="#0D1B2A"></rect>
+  <rect x="14" y="40" width="36" height="6" rx="1.5" fill="#F5F3ED" fill-opacity="0.5"></rect>
+  <rect x="18" y="29" width="36" height="6" rx="1.5" fill="#D4AF37"></rect>
+  <rect x="14" y="18" width="36" height="6" rx="1.5" fill="#F5F3ED" fill-opacity="0.5"></rect>
+</svg>

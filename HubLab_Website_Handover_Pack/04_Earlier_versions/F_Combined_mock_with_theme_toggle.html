@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HubLab mock site, with dark and light themes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+[data-theme="navy"]{--bg:#0A1628;--raised:#101E34;--core:#13233C;--ring:#1D2C45;--divider:#22324B;--text:#F5F3ED;--body:#C3C9D2;--muted:#AEB6C2;--faint:#8F98A6;--alt-bg:#F5F3ED;--alt-text:#0A1628;--alt-body:#1F2937;--alt-muted:#3A4250;--alt-faint:#6B7280;--alt-divider:#E5E7EB}
+[data-theme="cream"]{--bg:#FFFFFF;--raised:#F5F3ED;--core:#F5F3ED;--ring:#E5E7EB;--divider:#E5E7EB;--text:#0A1628;--body:#1F2937;--muted:#3A4250;--faint:#6B7280;--alt-bg:#0A1628;--alt-text:#F5F3ED;--alt-body:#C3C9D2;--alt-muted:#AEB6C2;--alt-faint:#8F98A6;--alt-divider:#22324B}
+[data-theme],[data-theme] section,[data-theme] header,[data-theme] footer,[data-theme] article,[data-theme] li,[data-theme] h1,[data-theme] h2,[data-theme] h3,[data-theme] p,[data-theme] span,[data-theme] dt,[data-theme] dd,[data-theme] a{transition:background-color 200ms ease,color 200ms ease,border-color 200ms ease}
+a{color:var(--text)}a:hover{color:#E9D58E}[data-theme="cream"] a:hover{color:#BE9A2C}
+.hl-seg{font-family:var(--font-ui);font-size:13px;font-weight:600;letter-spacing:.02em;padding:9px 14px;background:transparent;color:var(--muted);border:1px solid var(--divider);cursor:pointer;min-height:36px}
+.hl-seg[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.hl-seg:focus-visible{outline:2px solid #D4AF37;outline-offset:2px}
+.hl-nav a{color:var(--body);text-decoration:none}.hl-nav a:hover{color:var(--text)}
+@property --k{syntax:'<integer>';inherits:false;initial-value:0}
+@property --d{syntax:'<integer>';inherits:false;initial-value:188}
+@property --m{syntax:'<integer>';inherits:false;initial-value:0}
+@property --a{syntax:'<integer>';inherits:false;initial-value:0}
+@keyframes hl-reveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hl-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes hl-orbit-dot{0%{left:calc(100% - 6px);opacity:0}2%{opacity:1}8%{left:0;opacity:1}9%{opacity:0}10%{left:0;opacity:0}11%{opacity:1}16%{left:calc(100% - 6px);opacity:1}17%,100%{left:calc(100% - 6px);opacity:0}}
+@keyframes hl-orbit-node{0%,1%{border-color:var(--divider);color:var(--muted)}3%,16%{border-color:#D4AF37;color:var(--text)}19%,100%{border-color:var(--divider);color:var(--muted)}}
+@keyframes hl-core-pulse{0%,44%{border-color:#5A6B86}48%,54%{border-color:#D4AF37}60%,100%{border-color:#5A6B86}}
+@keyframes hl-layer-node{0%,2%{border-color:var(--divider);color:var(--muted)}6%,30%{border-color:var(--text);color:var(--text)}36%,100%{border-color:var(--divider);color:var(--muted)}}
+@keyframes hl-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes hl-in-lit{0%,2%{border-color:var(--divider);color:var(--muted)}6%,20%{border-color:#D4AF37;color:var(--text)}26%,100%{border-color:var(--divider);color:var(--muted)}}
+@keyframes hl-dot-run{0%,4%{left:0;opacity:0}6%{opacity:1}22%{left:calc(100% - 8px);opacity:1}24%,100%{left:calc(100% - 8px);opacity:0}}
+@keyframes hl-dot-run-fast{0%,24%{left:0;opacity:0}26%{opacity:1}40%{left:calc(100% - 8px);opacity:1}42%,100%{left:calc(100% - 8px);opacity:0}}
+@keyframes hl-stage-lit{0%,40%{border-color:var(--divider);color:var(--muted)}46%,62%{border-color:#D4AF37;color:var(--text)}68%,100%{border-color:var(--divider);color:var(--muted)}}
+@keyframes hl-sign-lit{0%,64%{color:var(--faint);border-color:var(--divider)}70%,84%{color:var(--text);border-color:var(--text)}90%,100%{color:var(--faint);border-color:var(--divider)}}
+@keyframes hl-dot-out{0%,70%{left:0;opacity:0}72%{opacity:1}84%{left:calc(100% - 8px);opacity:1}86%,100%{left:calc(100% - 8px);opacity:0}}
+@keyframes hl-out-lit{0%,84%{border-color:var(--divider);color:var(--muted)}88%,98%{border-color:#D4AF37;color:var(--text)}100%{border-color:var(--divider);color:var(--muted)}}
+@keyframes hl-count-80{from{--k:0}to{--k:80}}
+@keyframes hl-count-4{from{--k:0}to{--k:4}}
+@keyframes hl-count-120{from{--k:0}to{--k:120}}
+@keyframes hl-blink{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes hl-row-in{0%,2%{opacity:0;transform:translateY(6px)}8%,86%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(0)}}
+@keyframes hl-tick-in{0%,6%{opacity:0}10%,86%{opacity:1}92%,100%{opacity:0}}
+@keyframes hl-mapped{0%,8%{--m:0}14%{--m:1}26%{--m:2}38%{--m:3}50%{--m:4}62%{--m:5}74%,86%{--m:6}92%,100%{--m:0}}
+@keyframes hl-bar{0%,12%{width:100%}62%,88%{width:4.3%}100%{width:100%}}
+@keyframes hl-days{0%,12%{--d:188}62%,88%{--d:8}100%{--d:188}}
+@keyframes hl-box-in{0%,4%{background:transparent;border-color:var(--divider)}10%,84%{background:var(--text);border-color:var(--text)}90%,100%{background:transparent;border-color:var(--divider)}}
+@keyframes hl-box-tick{0%,8%{opacity:0}12%,84%{opacity:1}90%,100%{opacity:0}}
+@keyframes hl-cert{0%,70%{opacity:0;border-color:var(--divider)}76%,86%{opacity:1;border-color:#D4AF37}92%,100%{opacity:0;border-color:var(--divider)}}
+@keyframes hl-travel{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes hl-loop-node{0%{border-color:var(--divider);color:var(--muted)}2%,20%{border-color:#D4AF37;color:var(--text)}26%,100%{border-color:var(--divider);color:var(--muted)}}
+.hl-reveal{opacity:0;animation:hl-reveal .9s cubic-bezier(.2,0,0,1) forwards}
+.hl-arc{animation:hl-spin 36s linear infinite}.hl-arc-rev{animation:hl-spin 54s linear infinite reverse}
+.hl-orbit-dot{animation:hl-orbit-dot 18s linear infinite}.hl-orbit-node{animation:hl-orbit-node 18s linear infinite}
+.hl-core{animation:hl-core-pulse 3s linear infinite}.hl-layer-node{animation:hl-layer-node 9s linear infinite}
+.hl-track{display:flex;width:max-content;animation:hl-marquee 70s linear infinite}.hl-track-rev{animation-direction:reverse;animation-duration:95s}
+.hl-fade{mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.hl-in{animation:hl-in-lit 8s linear infinite}.hl-in-dot{animation:hl-dot-run 8s linear infinite}.hl-core-dot{animation:hl-dot-run-fast 2s linear infinite}
+.hl-stage{animation:hl-stage-lit 2s linear infinite}.hl-sign{animation:hl-sign-lit 2s linear infinite}.hl-out-dot{animation:hl-dot-out 2s linear infinite}.hl-out{animation:hl-out-lit 2s linear infinite}
+.hl-count{--k:0;counter-reset:k var(--k);animation-duration:2.6s;animation-timing-function:ease-out;animation-fill-mode:forwards;animation-delay:.6s}.hl-count::before{content:counter(k)}
+.hl-c80{animation-name:hl-count-80}.hl-c4{animation-name:hl-count-4}.hl-c120{animation-name:hl-count-120}
+.hl-live{animation:hl-blink 2s ease-in-out infinite}
+.hl-row{animation:hl-row-in 10s linear infinite}.hl-tick{animation:hl-tick-in 10s linear infinite}
+.hl-mapped{--m:0;counter-reset:m var(--m);animation:hl-mapped 10s linear infinite}.hl-mapped::before{content:counter(m)}
+.hl-bar{animation:hl-bar 8s cubic-bezier(.4,0,.2,1) infinite}.hl-days{--d:188;counter-reset:d var(--d);animation:hl-days 8s cubic-bezier(.4,0,.2,1) infinite}.hl-days::before{content:counter(d)}
+.hl-box{animation:hl-box-in 10s linear infinite}.hl-box-tick{animation:hl-box-tick 10s linear infinite}.hl-cert{animation:hl-cert 10s linear infinite}
+.hl-traveller{offset-path:path("M 220 10 A 210 210 0 1 1 219.9 10");animation:hl-travel 12s linear infinite}.hl-loop-node{animation:hl-loop-node 12s linear infinite}
+.hl-eyebrow-t{font-family:var(--font-ui);font-size:13px;font-weight:500;letter-spacing:.02em;color:var(--faint)}
+.hl-chip{border:1px solid var(--divider);padding:12px 14px;font-family:var(--font-ui);font-size:14px;font-weight:500;color:var(--muted);background:var(--bg)}
+.hl-node{position:absolute;transform:translate(-50%,-50%);border:1px solid var(--divider);background:var(--bg);padding:9px 13px;font-family:var(--font-ui);font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap}
+.hl-list-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;line-height:1.4;border-bottom:1px solid var(--divider);font-family:var(--font-ui);font-size:13px;font-weight:500;color:var(--body);opacity:0}
+.hl-check{display:flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:13px;font-weight:500;color:var(--body)}
+.hl-box{position:relative;width:14px;height:14px;border:1px solid var(--divider);box-sizing:border-box;flex:none;background:transparent}
+.hl-box-tick{position:absolute;inset:1px;opacity:0}
+.hl-h2{margin:0;font-family:var(--font-heading);font-weight:600;font-stretch:104%;font-size:clamp(30px,3.6vw,46px);line-height:1.05;letter-spacing:-.015em;color:var(--text);text-wrap:pretty}
+.hl-h3{margin:0;font-family:var(--font-heading);font-weight:600;font-stretch:102%;font-size:24px;line-height:1.15;color:var(--text)}
+.hl-p{margin:0;font-size:17px;line-height:1.6;color:var(--body);max-width:62ch}
+.hl-wrap{max-width:1200px;margin:0 auto;width:100%;box-sizing:border-box;padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)}
+@media (prefers-reduced-motion:reduce){.hl-reveal,.hl-arc,.hl-arc-rev,.hl-orbit-dot,.hl-orbit-node,.hl-core,.hl-layer-node,.hl-track,.hl-in,.hl-in-dot,.hl-core-dot,.hl-stage,.hl-sign,.hl-out-dot,.hl-out,.hl-count,.hl-live,.hl-row,.hl-tick,.hl-mapped,.hl-bar,.hl-days,.hl-box,.hl-box-tick,.hl-cert,.hl-traveller,.hl-loop-node{animation:none}.hl-reveal{opacity:1;transform:none}.hl-c80{--k:80}.hl-c4{--k:4}.hl-c120{--k:120}.hl-in-dot,.hl-core-dot,.hl-out-dot,.hl-orbit-dot,.hl-traveller{opacity:0}.hl-list-item{opacity:1}.hl-tick{opacity:1}.hl-mapped{--m:6}.hl-bar{width:4.3%}.hl-days{--d:8}.hl-box{background:var(--text);border-color:var(--text)}.hl-box-tick{opacity:1}.hl-cert{opacity:1;border-color:#D4AF37}}
+</style>
+</head>
+<body>
+<div id="top" data-theme="navy" style="font-family: var(--font-body); color: var(--text); background: var(--bg); display: flex; flex-direction: column; width: 100%; min-width: 0">
+
+<header style="border-bottom: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 20px; padding-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+    <a href="#top" style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 24px; line-height: 1; color: var(--text); text-decoration: none">HubLab</a>
+    <nav class="hl-nav" aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 8px 26px; font-family: var(--font-ui); font-size: 15px; font-weight: 500">
+      <a href="#gap">The gap</a>
+      <a href="#how">How it works</a>
+      <a href="#proof">Proof</a>
+      <a href="#sectors">Sectors</a>
+      <a href="#certainty">CERTAiNTY</a>
+      <a href="#data">Your data</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+      <div role="group" aria-label="Page theme" style="display: flex">
+        <button class="hl-seg" type="button" aria-pressed="true">Dark</button>
+        <button class="hl-seg" type="button" aria-pressed="false" style="margin-left: -1px">Light</button>
+      </div>
+      <a class="hl-btn hl-btn-ghost" href="#contact">Start a conversation</a>
+    </div>
+  </div>
+</header>
+
+<section class="hl-wrap" style="padding-top: 96px; padding-bottom: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 48px; align-items: center">
+  <div style="display: flex; flex-direction: column; gap: 28px; min-width: 0">
+    <span class="hl-eyebrow-t hl-reveal" style="animation-delay: 0s">Australia's regulatory intelligence layer</span>
+    <h1 class="hl-reveal" style="animation-delay: .15s; margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(42px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -0.02em; color: var(--text); max-width: 12em; text-wrap: pretty">The rules are written. Someone has to read them, every cycle.</h1>
+    <div class="hl-reveal" style="animation-delay: .3s"><div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div></div>
+    <p class="hl-reveal" style="animation-delay: .4s; margin: 0; font-size: 20px; line-height: 1.55; color: var(--body); max-width: 32em">The system tells you what arrived. It cannot tell you what it means. That gap is where non-compliance lives, and since January 2025 it carries personal exposure for directors. HubLab closes it with definitive AI: the rule itself, encoded; the same answer every time; every decision traced to the clause that made it. A person signs off every finding.</p>
+    <div class="hl-reveal" style="animation-delay: .55s; display: flex; flex-wrap: wrap; gap: 16px; align-items: center">
+      <a class="hl-btn" href="#contact">Start a conversation</a>
+      <a class="hl-btn hl-btn-ghost" href="#proof">Read the record</a>
+    </div>
+  </div>
+  <div role="img" aria-label="Three rings: the systems you run on the outside, the HubLab layer in the middle, the Labrynth engine at the core. Signals travel from each system to the core and back." style="position: relative; width: 580px; max-width: 100%; aspect-ratio: 1 / 1; justify-self: center; min-width: 0; overflow: hidden">
+    <div aria-hidden="true" style="position: absolute; left: 30px; top: 30px; width: 520px; height: 520px; border: 1px solid var(--ring); border-radius: 50%; box-sizing: border-box"></div>
+    <div class="hl-arc" aria-hidden="true" style="position: absolute; left: 30px; top: 30px; width: 520px; height: 520px; border: 1px solid transparent; border-top-color: #5A6B86; border-radius: 50%; box-sizing: border-box"></div>
+    <div aria-hidden="true" style="position: absolute; left: 120px; top: 120px; width: 340px; height: 340px; border: 1px solid var(--ring); border-radius: 50%; box-sizing: border-box"></div>
+    <div class="hl-arc-rev" aria-hidden="true" style="position: absolute; left: 120px; top: 120px; width: 340px; height: 340px; border: 1px solid transparent; border-bottom-color: #5A6B86; border-radius: 50%; box-sizing: border-box"></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(-90deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 0s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(-30deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 3s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(30deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 6s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(90deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 9s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(150deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 12s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div aria-hidden="true" style="position: absolute; left: 290px; top: 290px; width: 180px; height: 1px; background: var(--divider); transform: rotate(210deg) translateX(80px); transform-origin: 0 50%"><span class="hl-orbit-dot" style="animation-delay: 15s; position: absolute; top: -3px; width: 6px; height: 6px; background: #D4AF37; opacity: 0"></span></div>
+    <div class="hl-core" style="position: absolute; left: 210px; top: 210px; width: 160px; height: 160px; border-radius: 50%; background: var(--core); border: 1px solid #5A6B86; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center">
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 18px; line-height: 1; color: var(--text)">Labrynth</span>
+      <span style="font-family: var(--font-ui); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: var(--faint)">The engine</span>
+    </div>
+    <div class="hl-node hl-layer-node" style="animation-delay: 0s; left: 143px; top: 205px; font-size: 13px; padding: 7px 11px">Discovery</div>
+    <div class="hl-node hl-layer-node" style="animation-delay: 3s; left: 437px; top: 205px; font-size: 13px; padding: 7px 11px">Build</div>
+    <div class="hl-node hl-layer-node" style="animation-delay: 6s; left: 290px; top: 460px; font-size: 13px; padding: 7px 11px">Licence</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 0s; left: 290px; top: 30px">Payroll</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 3s; left: 515px; top: 160px">Rostering and time</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 6s; left: 515px; top: 420px">Case management</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 9s; left: 290px; top: 550px">Portfolios and mandates</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 12s; left: 65px; top: 420px">Permits and planning</div>
+    <div class="hl-node hl-orbit-node" style="animation-delay: 15s; left: 65px; top: 160px">HR and contracts</div>
+  </div>
+</section>
+
+<div style="border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider)">
+  <div class="hl-fade" style="overflow: hidden; padding: 16px 0; border-bottom: 1px solid var(--divider)">
+    <div class="hl-track" aria-label="What the engine reads">
+      <ul style="margin: 0; padding: 0 28px 0 0; list-style: none; display: flex; align-items: center; gap: 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--body); white-space: nowrap">
+        <li>Modern Awards</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Enterprise agreements</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Investment mandates</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Planning codes</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>NDIS pricing arrangements</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Grant guidelines</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Aged care funding rules</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Breach reporting obligations</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Payroll tax</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li><li>Long service leave</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+      </ul>
+      <ul aria-hidden="true" style="margin: 0; padding: 0 28px 0 0; list-style: none; display: flex; align-items: center; gap: 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--body); white-space: nowrap">
+        <li>Modern Awards</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Enterprise agreements</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Investment mandates</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Planning codes</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>NDIS pricing arrangements</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Grant guidelines</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Aged care funding rules</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Breach reporting obligations</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Payroll tax</li><li style="width: 8px; height: 2px; background: #D4AF37"></li><li>Long service leave</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="hl-fade" style="overflow: hidden; padding: 16px 0">
+    <div class="hl-track hl-track-rev" aria-label="Where the rules are read">
+      <ul style="margin: 0; padding: 0 28px 0 0; list-style: none; display: flex; align-items: center; gap: 28px; font-family: var(--font-body); font-size: 17px; color: var(--muted); white-space: nowrap">
+        <li>A national facilities services group</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>A state government</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>Private wealth</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>NDIS and aged care</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>Planning and construction</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>Financial services</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>Government services</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li><li>Lancaster, California</li><li aria-hidden="true" style="width: 1px; height: 14px; background: var(--divider)"></li>
+      </ul>
+      <ul aria-hidden="true" style="margin: 0; padding: 0 28px 0 0; list-style: none; display: flex; align-items: center; gap: 28px; font-family: var(--font-body); font-size: 17px; color: var(--muted); white-space: nowrap">
+        <li>A national facilities services group</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>A state government</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>Private wealth</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>NDIS and aged care</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>Planning and construction</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>Financial services</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>Government services</li><li style="width: 1px; height: 14px; background: var(--divider)"></li><li>Lancaster, California</li><li style="width: 1px; height: 14px; background: var(--divider)"></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="gap" class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px; align-items: start">
+  <div style="display: flex; flex-direction: column; gap: 24px">
+    <span class="hl-eyebrow-t">The gap</span>
+    <h2 class="hl-h2">Interpretation is the gap. Since January 2025, the exposure is personal.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    <p class="hl-p">The systems you already run manage process well and stop at the hard part. Payroll, case management, permitting, core banking: each tells you what arrived. None tells you what it means. Deliberate underpayment is now a criminal offence, with personal exposure for directors, and the question a regulator asks is not whether you had a system. It is whether you can show the decision, the clause and the person who signed it.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--divider)">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 28px; border-right: 1px solid var(--divider)">
+      <span class="hl-eyebrow-t">Probabilistic AI</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--muted)">A likely answer. Ask again tomorrow and it may change.</span>
+      <span style="font-size: 15px; line-height: 1.55; color: var(--muted)">Useful for drafting. Hard to defend to a regulator, an auditor or a court.</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 28px; background: var(--raised)">
+      <span class="hl-eyebrow-t">Definitive AI</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--text)">The rule itself, encoded. Same answer every time, with the clause that made it.</span>
+      <span style="font-size: 15px; line-height: 1.55; color: var(--body)">Awards, agreements, mandates, planning codes. A person signs off every finding.</span>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px">
+      <div style="display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+        <span class="hl-eyebrow-t">From rules to action. In weeks, not months.</span>
+        <h2 class="hl-h2">What arrived, what it means, and who signed it.</h2>
+        <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--faint)"><span class="hl-live" aria-hidden="true" style="width: 6px; height: 6px; background: var(--text)"></span>In live production</div>
+    </div>
+    <div style="overflow-x: auto">
+      <div style="min-width: 1040px; display: grid; grid-template-columns: 250px 56px 1px 72px 300px 72px 1px 56px 230px; align-items: center; padding: 8px 0">
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+          <li class="hl-chip hl-in" style="animation-delay: 0s">Modern Award determination</li>
+          <li class="hl-chip hl-in" style="animation-delay: 2s">Mandate change on a portfolio</li>
+          <li class="hl-chip hl-in" style="animation-delay: 4s">NDIS pricing arrangement</li>
+          <li class="hl-chip hl-in" style="animation-delay: 6s">Planning scheme amendment</li>
+        </ul>
+        <div style="display: flex; flex-direction: column; gap: 14px; align-self: stretch; justify-content: center">
+          <div style="position: relative; height: 45px; display: flex; align-items: center"><span aria-hidden="true" style="width: 100%; height: 1px; background: var(--divider)"></span><span class="hl-in-dot" aria-hidden="true" style="animation-delay: 0s; position: absolute; top: 18px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+          <div style="position: relative; height: 45px; display: flex; align-items: center"><span aria-hidden="true" style="width: 100%; height: 1px; background: var(--divider)"></span><span class="hl-in-dot" aria-hidden="true" style="animation-delay: 2s; position: absolute; top: 18px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+          <div style="position: relative; height: 45px; display: flex; align-items: center"><span aria-hidden="true" style="width: 100%; height: 1px; background: var(--divider)"></span><span class="hl-in-dot" aria-hidden="true" style="animation-delay: 4s; position: absolute; top: 18px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+          <div style="position: relative; height: 45px; display: flex; align-items: center"><span aria-hidden="true" style="width: 100%; height: 1px; background: var(--divider)"></span><span class="hl-in-dot" aria-hidden="true" style="animation-delay: 6s; position: absolute; top: 18px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+        </div>
+        <div aria-hidden="true" style="width: 1px; height: 190px; background: var(--divider)"></div>
+        <div style="position: relative; height: 1px; background: var(--divider)"><span class="hl-core-dot" aria-hidden="true" style="position: absolute; top: -4px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+        <div style="display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--divider); padding: 18px; background: var(--raised)">
+          <div style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 18px; line-height: 1; color: var(--text); padding-bottom: 12px; border-bottom: 1px solid var(--divider)">HubLab</div>
+          <div class="hl-chip hl-stage" style="animation-delay: 0s; padding: 10px 12px; background: transparent">Read the rule, clause by clause</div>
+          <div class="hl-chip hl-stage" style="animation-delay: .16s; padding: 10px 12px; background: transparent">Map it to your data</div>
+          <div class="hl-chip hl-stage" style="animation-delay: .32s; padding: 10px 12px; background: transparent">Decide, deterministically</div>
+          <div class="hl-sign" style="margin-top: 4px; padding-top: 10px; border-top: 1px solid var(--divider); font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--faint)">A person signs off</div>
+        </div>
+        <div style="position: relative; height: 1px; background: var(--divider)"><span class="hl-out-dot" aria-hidden="true" style="position: absolute; top: -4px; width: 8px; height: 8px; background: #D4AF37; opacity: 0"></span></div>
+        <div aria-hidden="true" style="width: 1px; height: 150px; background: var(--divider)"></div>
+        <div style="display: flex; flex-direction: column; gap: 14px; align-self: stretch; justify-content: center">
+          <div aria-hidden="true" style="height: 45px; display: flex; align-items: center"><span style="width: 100%; height: 1px; background: var(--divider)"></span></div>
+          <div aria-hidden="true" style="height: 45px; display: flex; align-items: center"><span style="width: 100%; height: 1px; background: var(--divider)"></span></div>
+          <div aria-hidden="true" style="height: 45px; display: flex; align-items: center"><span style="width: 100%; height: 1px; background: var(--divider)"></span></div>
+        </div>
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px">
+          <li class="hl-chip hl-out" style="animation-delay: 0s">The clause that decided it</li>
+          <li class="hl-chip hl-out" style="animation-delay: .1s">The person who signed it</li>
+          <li class="hl-chip hl-out" style="animation-delay: .2s">The record a regulator can follow</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 32px; border-top: 1px solid var(--divider); padding-top: 28px">
+      <div style="display: flex; flex-direction: column; gap: 10px"><span class="hl-eyebrow-t">Discovery</span><p class="hl-p" style="font-size: 16px">We run discovery with you in weeks, inside your business, your ways of working and your compliance obligations.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 10px"><span class="hl-eyebrow-t">Build</span><p class="hl-p" style="font-size: 16px">A working prototype you can touch, and a measured result beside your production systems before anything further is committed.</p></div>
+      <div style="display: flex; flex-direction: column; gap: 10px"><span class="hl-eyebrow-t">Licence</span><p class="hl-p" style="font-size: 16px">Each stage priced on the evidence of the stage before. One accountable party, on the ground in Australia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof" style="background: var(--alt-bg); color: var(--alt-text)">
+  <div class="hl-wrap" style="padding-top: 64px; padding-bottom: 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 48px; align-items: end">
+    <div style="display: flex; flex-direction: column; gap: 16px">
+      <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--alt-faint)">Not a roadmap. A record.</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(64px, 7vw, 96px); line-height: 0.95; letter-spacing: -0.02em; color: var(--alt-text); font-feature-settings: 'lnum' 1"><span class="hl-count hl-c80"></span>,000+</span>
+      <div role="presentation" style="height: 2px; width: 88px; background: #D4AF37"></div>
+      <p style="margin: 0; font-size: 21px; line-height: 1.55; color: var(--alt-body); max-width: 34em">Shifts validated in live production for a national facilities services group, across <span class="hl-count hl-c4"></span>,000+ employees, with <span class="hl-count hl-c120"></span>+ Modern Awards ingested.</p>
+    </div>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: var(--alt-muted); max-width: 62ch">Every number on this page is from live production, and these are the only ones we quote. Customers are described by sector until written approval is on file.</p>
+  </div>
+</section>
+
+<section style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+      <span class="hl-eyebrow-t">How we deliver</span>
+      <h2 class="hl-h2">Discovery, build, licence. Each one leaves a record.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--divider); padding: 24px; background: var(--raised)">
+        <div style="min-height: 236px; display: flex; flex-direction: column; border-top: 1px solid var(--divider)">
+          <div class="hl-list-item hl-row" style="animation-delay: 0s"><span>Overtime after 38 hours</span><span class="hl-tick" style="animation-delay: 0s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div class="hl-list-item hl-row" style="animation-delay: 1.2s"><span>Weekend penalty rates</span><span class="hl-tick" style="animation-delay: 1.2s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div class="hl-list-item hl-row" style="animation-delay: 2.4s"><span>Minimum engagement, casuals</span><span class="hl-tick" style="animation-delay: 2.4s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div class="hl-list-item hl-row" style="animation-delay: 3.6s"><span>Allowances: first aid, meal</span><span class="hl-tick" style="animation-delay: 3.6s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div class="hl-list-item hl-row" style="animation-delay: 4.8s"><span>Annual leave loading</span><span class="hl-tick" style="animation-delay: 4.8s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div class="hl-list-item hl-row" style="animation-delay: 6s"><span>Public holiday rates</span><span class="hl-tick" style="animation-delay: 6s; width: 8px; height: 2px; background: #D4AF37; opacity: 0"></span></div>
+          <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px"><span class="hl-eyebrow-t">Obligations mapped to your roster</span><span style="font-family: var(--font-heading); font-weight: 600; font-size: 22px; color: var(--text); font-feature-settings: 'lnum' 1"><span class="hl-mapped"></span></span></div>
+        </div>
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3" style="font-size: 22px">Discovery</h3>
+        <p class="hl-p" style="font-size: 15px">In weeks, not months. The real problem, found in your data against the rules that apply to it.</p>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--divider); padding: 24px; background: var(--raised)">
+        <div style="height: 236px; display: flex; flex-direction: column; gap: 22px; border-top: 1px solid var(--divider); padding-top: 20px">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; justify-content: space-between" class="hl-eyebrow-t"><span>Planning permit, by hand</span><span style="font-feature-settings: 'lnum' 1">188 days</span></div>
+            <div style="height: 14px; background: var(--ring); width: 100%"></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div style="display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--text)"><span>On the engine</span><span style="font-feature-settings: 'lnum' 1"><span class="hl-days"></span> days</span></div>
+            <div style="height: 14px; background: var(--ring); width: 100%; position: relative"><div class="hl-bar" style="position: absolute; left: 0; top: 0; height: 14px; background: var(--text); width: 100%"></div></div>
+          </div>
+          <p style="margin: auto 0 0; font-size: 14px; line-height: 1.5; color: var(--muted)">Lancaster, California. Same engine, different rules.</p>
+        </div>
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3" style="font-size: 22px">Build</h3>
+        <p class="hl-p" style="font-size: 15px">A working prototype you can touch, and a measured result before anything further is committed.</p>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 16px; border: 1px solid var(--divider); padding: 24px; background: var(--raised)">
+        <div style="height: 236px; display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--divider); padding-top: 16px">
+          <div class="hl-check"><span class="hl-box" style="animation-delay: 0s"><svg class="hl-box-tick" style="animation-delay: 0s" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="var(--bg)" stroke-width="1.5"/></svg></span>Shifts checked against the award</div>
+          <div class="hl-check"><span class="hl-box" style="animation-delay: 1.4s"><svg class="hl-box-tick" style="animation-delay: 1.4s" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="var(--bg)" stroke-width="1.5"/></svg></span>Exceptions listed with the clause</div>
+          <div class="hl-check"><span class="hl-box" style="animation-delay: 2.8s"><svg class="hl-box-tick" style="animation-delay: 2.8s" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="var(--bg)" stroke-width="1.5"/></svg></span>Finding reviewed by a person</div>
+          <div class="hl-check"><span class="hl-box" style="animation-delay: 4.2s"><svg class="hl-box-tick" style="animation-delay: 4.2s" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="var(--bg)" stroke-width="1.5"/></svg></span>Signed off</div>
+          <div class="hl-check"><span class="hl-box" style="animation-delay: 5.6s"><svg class="hl-box-tick" style="animation-delay: 5.6s" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.5l2.5 2.5 4.5-5" fill="none" stroke="var(--bg)" stroke-width="1.5"/></svg></span>Immutable record kept, insurer behind it</div>
+          <div class="hl-cert" style="margin-top: auto; align-self: flex-start; border: 1px solid var(--divider); padding: 8px 12px; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 15px; color: var(--text); opacity: 0">Pay run certified before it locks</div>
+        </div>
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3" style="font-size: 22px">Licence</h3>
+        <p class="hl-p" style="font-size: 15px">Live production in your own segregated environment, hosted in Australia. The audit record is yours.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 64px; align-items: center">
+    <div role="img" aria-label="A loop of four steps: read the rules, map the obligations, decide, a person signs off. A marker travels around the loop and each step lights as it passes. The record sits in the centre." style="position: relative; width: 440px; max-width: 100%; aspect-ratio: 1 / 1; justify-self: center">
+      <div aria-hidden="true" style="position: absolute; inset: 10px; border: 1px dashed var(--divider); border-radius: 50%"></div>
+      <div class="hl-traveller" aria-hidden="true" style="position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; background: #D4AF37"></div>
+      <div style="position: absolute; left: 110px; top: 110px; width: 220px; height: 220px; border-radius: 50%; border: 1px solid var(--divider); background: var(--core); box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 22px; line-height: 1; color: var(--text)">The record</span>
+        <span style="font-size: 13px; line-height: 1.45; color: var(--muted)">Same input, same answer, every time.</span>
+      </div>
+      <div class="hl-node hl-loop-node" style="animation-delay: 0s; left: 220px; top: 10px">Read the rules</div>
+      <div class="hl-node hl-loop-node" style="animation-delay: 3s; left: 430px; top: 220px">Map the obligations</div>
+      <div class="hl-node hl-loop-node" style="animation-delay: 6s; left: 220px; top: 430px">Decide, deterministically</div>
+      <div class="hl-node hl-loop-node" style="animation-delay: 9s; left: 10px; top: 220px">A person signs off</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0">
+      <span class="hl-eyebrow-t">Every cycle</span>
+      <h2 class="hl-h2">Continuous, not point in time.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+      <p class="hl-p">A review lands once and the rules change the week after. The engine reads them again every pay run, every portfolio, every application, and a person signs off each finding before it is acted on. That is a record a regulator can follow.</p>
+      <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 24px; border-top: 1px solid var(--divider); padding-top: 20px">
+        <div style="display: flex; flex-direction: column; gap: 6px"><dt class="hl-eyebrow-t">A review</dt><dd style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--muted)">Once, on the day it was done.</dd></div>
+        <div style="display: flex; flex-direction: column; gap: 6px"><dt class="hl-eyebrow-t">The record</dt><dd style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--text)">Every cycle, with the clause and the signature.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="sectors" style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 720px">
+      <span class="hl-eyebrow-t">One engine, many domains</span>
+      <h2 class="hl-h2">Regulated work to get right, by sector.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); border-top: 1px solid var(--divider); border-left: 1px solid var(--divider)">
+      <article style="display: flex; flex-direction: column; gap: 14px; padding: 32px; border-right: 1px solid var(--divider); border-bottom: 1px solid var(--divider)">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3">Private wealth and financial services</h3>
+        <p class="hl-p" style="font-size: 16px">Investment mandates read against every portfolio, before trades and after, with look-through to the real exposures and every exception a case.</p>
+        <span class="hl-eyebrow-t">For the CFO and the board</span>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 14px; padding: 32px; border-right: 1px solid var(--divider); border-bottom: 1px solid var(--divider)">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3">Government</h3>
+        <p class="hl-p" style="font-size: 16px">The rules are written. Someone has to read them, every cycle. We read them the way your specialists do, at scale. Planning permits went from 188 days to 8 on the same engine.</p>
+        <span class="hl-eyebrow-t">For the secretary and the CFO</span>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 14px; padding: 32px; border-right: 1px solid var(--divider); border-bottom: 1px solid var(--divider)">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3">Technology and platforms</h3>
+        <p class="hl-p" style="font-size: 16px">Australian workforce, contractor and service obligations that a global head office does not read. We sit above the systems you run, hosted in Australia, segregated per customer.</p>
+        <span class="hl-eyebrow-t">For the regional CFO and the CIO</span>
+      </article>
+      <article style="display: flex; flex-direction: column; gap: 14px; padding: 32px; border-right: 1px solid var(--divider); border-bottom: 1px solid var(--divider)">
+        <div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div>
+        <h3 class="hl-h3">Enterprise</h3>
+        <p class="hl-p" style="font-size: 16px">Payroll and awards, NDIS and aged care, planning and construction. First live in payroll for a national facilities services group.</p>
+        <span class="hl-eyebrow-t">For the CFO and the payroll lead</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="certainty" style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 96px; padding-bottom: 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px; align-items: start">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <span class="hl-eyebrow-t">First live in payroll</span>
+      <h2 class="hl-h2">CERTAiNTY certifies every pay run before it locks, and insurance stands behind the result.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+      <p class="hl-p">The first insurance-backed payroll assurance in Australia. It sits above your existing payroll system, reads the award or agreement for every shift, and certifies the pay run before it locks. Each run leaves an immutable record: the workforce data, the awards applied, the logic and the outcome. By HubLab, powered by Labrynth, supported with Hubify.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; border-top: 1px solid var(--divider)">
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--divider); align-items: baseline"><span class="hl-h3" style="font-size: 20px">Payroll assurance</span><span class="hl-eyebrow-t" style="color: var(--text)">Live</span></div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--divider); align-items: baseline"><span class="hl-h3" style="font-size: 20px">NDIS integrity</span><span class="hl-eyebrow-t" style="color: var(--text)">Live</span></div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--divider); align-items: baseline"><span class="hl-h3" style="font-size: 20px">Private wealth: mandate compliance</span><span class="hl-eyebrow-t">In build</span></div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--divider); align-items: baseline"><span class="hl-h3" style="font-size: 20px">Planning and construction</span><span class="hl-eyebrow-t">In build</span></div>
+      <div style="display: grid; grid-template-columns: 1fr auto; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--divider); align-items: baseline"><span class="hl-h3" style="font-size: 20px">Planning permits, Lancaster, California</span><span class="hl-eyebrow-t">188 days to 8</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="data" style="background: var(--alt-bg); color: var(--alt-text)">
+  <div class="hl-wrap" style="padding-top: 80px; padding-bottom: 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 12px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--alt-faint)">Your systems</span><h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--alt-text)">No rip and replace.</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--alt-body)">HubLab sits above the systems you already run. The systems of record stay the systems of record.</p></div>
+    <div style="display: flex; flex-direction: column; gap: 12px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--alt-faint)">Your data</span><h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--alt-text)">Onshore in Australia, always.</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--alt-body)">Each customer runs in its own segregated environment, hosted in Australia. The audit record is yours.</p></div>
+    <div style="display: flex; flex-direction: column; gap: 12px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--alt-faint)">Your people</span><h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: var(--alt-text)">A person signs off every finding.</h3><p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--alt-body)">Nothing is acted on until a person has reviewed and signed it. Support runs in Australian hours, with Hubify (ASX: HFY) and our own forward-deployed engineers.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="hl-wrap" style="padding-top: 120px; padding-bottom: 120px; display: flex; flex-direction: column; gap: 32px">
+  <h2 class="hl-h2" style="max-width: 16em">The first conversation is about the problem, not a proposal.</h2>
+  <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+  <p class="hl-p">Bring the obligation that costs you the most to read every cycle. Discovery in weeks, a working prototype you can touch, and a measured result before anything further is committed.</p>
+  <a class="hl-btn" href="mailto:enquiries@hublab.com.au">Start a conversation</a>
+</section>
+
+<footer style="border-top: 1px solid var(--divider)">
+  <div class="hl-wrap" style="padding-top: 24px; padding-bottom: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: var(--faint)">
+    <span>HubLab Pty Ltd · ABN 11 682 982 592 · Melbourne</span>
+    <span>enquiries@hublab.com.au</span>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var root=document.querySelector('[data-theme]'), b=[].slice.call(document.querySelectorAll('.hl-seg'));
+  function set(t){ root.setAttribute('data-theme',t); b[0].setAttribute('aria-pressed',t==='navy'); b[1].setAttribute('aria-pressed',t==='cream'); }
+  if(b.length===2){ b[0].addEventListener('click',function(){set('navy');}); b[1].addEventListener('click',function(){set('cream');}); }
+})();
+</script>
+</body>
+</html>

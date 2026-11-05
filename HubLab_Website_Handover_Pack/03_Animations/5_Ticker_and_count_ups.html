@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animation 5: Ticker, what the engine reads</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+@property --a{syntax:'<integer>';inherits:false;initial-value:0}
+@keyframes hl-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes hl-awards{from{--a:0}to{--a:120}}
+@keyframes hl-reveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hl-track{display:flex;gap:0;width:max-content;animation:hl-marquee 70s linear infinite}
+.hl-track-rev{animation-direction:reverse;animation-duration:95s}
+.hl-fade{mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.hl-awards{--a:0;counter-reset:a var(--a);animation:hl-awards 2.8s ease-out .4s forwards}
+.hl-awards::before{content:counter(a)}
+.hl-reveal{opacity:0;animation:hl-reveal .9s cubic-bezier(.2,0,0,1) forwards}
+@media (prefers-reduced-motion:reduce){.hl-track,.hl-awards,.hl-reveal{animation:none}.hl-awards{--a:120}.hl-reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div style="width: 1200px; height: 720px; box-sizing: border-box; padding: 48px 0; background: #0A1628; color: #F5F3ED; font-family: var(--font-body); display: flex; flex-direction: column; gap: 40px; overflow: hidden">
+
+  <div style="padding: 0 56px; display: flex; flex-direction: column; gap: 20px; max-width: 900px">
+    <div class="hl-reveal" style="animation-delay: 0s"><div class="hl-eyebrow">Australia's regulatory intelligence layer</div></div>
+    <h1 class="hl-reveal" style="animation-delay: .15s; margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 56px; line-height: 1.02; letter-spacing: -0.02em; color: #F5F3ED; text-wrap: pretty">The rules are written. Someone has to read them, every cycle.</h1>
+    <div class="hl-reveal" style="animation-delay: .3s"><div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div></div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 0; border-top: 1px solid #22324B; border-bottom: 1px solid #22324B">
+    <div class="hl-fade" style="overflow: hidden; padding: 18px 0; border-bottom: 1px solid #22324B">
+      <div class="hl-track" aria-label="Instruments the engine reads">
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: #C3C9D2; white-space: nowrap">
+          <li>Modern Awards</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Enterprise agreements</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Fair Work Act</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Superannuation Guarantee</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Planning schemes</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>NDIS pricing arrangements</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Grant guidelines</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Privacy Act</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Breach reporting obligations</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Procurement rules</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Payroll tax</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Long service leave</li><li aria-hidden="true" style="width: 8px; height: 2px; background: #D4AF37"></li>
+        </ul>
+        <ul aria-hidden="true" style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: #C3C9D2; white-space: nowrap">
+          <li>Modern Awards</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Enterprise agreements</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Fair Work Act</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Superannuation Guarantee</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Planning schemes</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>NDIS pricing arrangements</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Grant guidelines</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Privacy Act</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Breach reporting obligations</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Procurement rules</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Payroll tax</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+          <li>Long service leave</li><li style="width: 8px; height: 2px; background: #D4AF37"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hl-fade" style="overflow: hidden; padding: 18px 0">
+      <div class="hl-track hl-track-rev" aria-label="Where the rules are read">
+        <ul style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--font-body); font-size: 17px; color: #AEB6C2; white-space: nowrap">
+          <li>A national facilities services group</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>A state government</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Wealth and superannuation</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Technology and platforms</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Hospitality</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Healthcare</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Local government</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>NDIS providers</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Lancaster, California</li><li aria-hidden="true" style="width: 1px; height: 14px; background: #22324B"></li>
+        </ul>
+        <ul aria-hidden="true" style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--font-body); font-size: 17px; color: #AEB6C2; white-space: nowrap">
+          <li>A national facilities services group</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>A state government</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Wealth and superannuation</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Technology and platforms</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Hospitality</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Healthcare</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Local government</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>NDIS providers</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+          <li>Lancaster, California</li><li style="width: 1px; height: 14px; background: #22324B"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 0 56px; display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: end">
+    <div class="hl-reveal" style="animation-delay: .5s; display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">Not a roadmap. A record.</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 96px; line-height: 0.95; letter-spacing: -0.02em; color: #F5F3ED; font-feature-settings: 'lnum' 1"><span class="hl-awards"></span>+</span>
+    </div>
+    <p class="hl-reveal" style="animation-delay: .65s; margin: 0 0 10px; font-size: 20px; line-height: 1.5; color: #C3C9D2; max-width: 26em">Modern Awards ingested, clause by clause, and read again every pay run. The same engine reads a planning scheme or a funding rule the same way.</p>
+  </div>
+</div>
+
+</body>
+</html>

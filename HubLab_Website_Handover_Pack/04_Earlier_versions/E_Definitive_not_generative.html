@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HubLab homepage, direction E: Definitive, not generative</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap');
+</style>
+<style>
+/* HubLab tokens */
+/* HubLab token values, applied from the design system's tokens.json so bundle.css resolves. */
+:root{
+  --hl-navy:#0A1628;--hl-cream:#F5F3ED;--hl-gold:#D4AF37;--hl-slate:#5A6B86;
+  --hl-surface-raised:#101E34;--hl-surface-core:#13233C;--hl-ring-unlit:#1D2C45;--hl-rule:#22324B;
+  --hl-text-on-navy:#F5F3ED;--hl-text-body:#C3C9D2;--hl-text-muted:#AEB6C2;--hl-text-faint:#8F98A6;
+  --hl-text-on-cream:#0A1628;--hl-text-body-on-cream:#1F2937;--hl-text-muted-on-cream:#3A4250;--hl-text-faint-on-cream:#6B7280;
+  --hl-rule-on-cream:#E5E7EB;--hl-gold-hover:#E2C45E;--hl-gold-pressed:#BE9A2C;--hl-link-hover:#E9D58E;
+  --color-bg:var(--hl-navy);--color-surface:var(--hl-surface-raised);--color-text:var(--hl-text-on-navy);
+  --color-text-muted:var(--hl-text-body);--color-accent:var(--hl-gold);--color-accent-hover:var(--hl-gold-hover);
+  --color-accent-pressed:var(--hl-gold-pressed);--color-divider:var(--hl-rule);--color-bg-alt:var(--hl-cream);--color-text-alt:var(--hl-text-on-cream);
+  --font-heading:"Archivo",Arial,Helvetica,sans-serif;--font-body:"Source Serif 4",Georgia,serif;--font-ui:"Archivo",Arial,Helvetica,sans-serif;
+  --text-display:clamp(44px,6.5vw,88px);--text-h1:clamp(34px,4.2vw,52px);--text-h2:clamp(26px,2.6vw,34px);--text-h3:24px;
+  --text-lead:20px;--text-body:17px;--text-small:14px;--text-label:13px;--text-micro:11px;
+  --leading-tight:1.02;--leading-snug:1.15;--leading-body:1.6;
+  --tracking-display:-0.02em;--tracking-h1:-0.015em;--tracking-label:0.02em;
+  --headline-stretch:104%;--lead-stretch:102%;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:120px;
+  --page-pad:64px;--page-max:1200px;--measure-body:62ch;--measure-lead:34em;
+  --radius:0px;--radius-badge:14px;--rule-w:2px;--rule-hair:1px;--rule-short:48px;--rule-long:88px;
+}
+.on-cream,[data-theme="cream"]{
+  --color-bg:var(--hl-cream);--color-surface:var(--hl-cream);--color-text:var(--hl-text-on-cream);
+  --color-text-muted:var(--hl-text-body-on-cream);--color-divider:var(--hl-rule-on-cream);
+  --color-bg-alt:var(--hl-navy);--color-text-alt:var(--hl-text-on-navy);
+}
+
+/* HubLab design system base styles */
+
+/* HubLab base styles. Values come from tokens.json; this sheet only applies them. */
+body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body)}
+h1,h2,h3,h4{font-family:var(--font-heading);font-weight:600;margin:0}
+h1{font-size:var(--text-h1);font-stretch:var(--headline-stretch);line-height:var(--leading-tight);letter-spacing:var(--tracking-h1)}
+h2{font-size:var(--text-h2);font-stretch:var(--headline-stretch);line-height:var(--leading-snug)}
+h3{font-size:var(--text-h3);font-stretch:var(--lead-stretch);line-height:var(--leading-snug)}
+p{margin:0;max-width:var(--measure-body)}
+a{color:var(--color-text);text-decoration:underline;text-decoration-color:var(--hl-gold);text-underline-offset:3px}
+a:hover{color:var(--hl-link-hover)}
+.on-cream{background:var(--hl-cream);color:var(--hl-text-on-cream)}
+.on-cream p,[data-theme="cream"] p{color:var(--hl-text-body-on-cream)}
+.on-cream a,[data-theme="cream"] a{color:var(--hl-text-on-cream)}
+.on-cream a:hover,[data-theme="cream"] a:hover{color:var(--hl-gold-pressed)}
+.hl-eyebrow{font-family:var(--font-ui);font-size:var(--text-label);font-weight:500;letter-spacing:var(--tracking-label);color:var(--hl-text-faint)}
+.on-cream .hl-eyebrow,[data-theme="cream"] .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-rule{height:var(--rule-w);width:var(--rule-long);background:var(--hl-gold);border:0;margin:0}
+.hl-rule-short{width:var(--rule-short)}
+.hl-btn{display:inline-flex;align-self:flex-start;white-space:nowrap;align-items:center;gap:var(--space-2);font-family:var(--font-ui);font-size:15px;font-weight:600;padding:14px 22px;background:var(--hl-gold);color:var(--hl-navy);text-decoration:none;border:0;border-radius:var(--radius);cursor:pointer;transition:background-color 200ms ease}
+.hl-btn:hover{background:var(--hl-gold-hover);color:var(--hl-navy)} .hl-btn:active{background:var(--hl-gold-pressed)}
+.hl-btn-ghost{background:transparent;color:var(--color-text);box-shadow:inset 0 0 0 1px var(--hl-gold)}
+.hl-btn-ghost:hover{background:rgba(212,175,55,.08);color:var(--color-text)} .hl-btn-ghost:active{background:rgba(212,175,55,.16)}
+.on-cream .hl-btn-ghost,.on-cream .hl-btn-ghost:hover{color:var(--hl-navy)}
+.hl-btn[disabled],.hl-btn[aria-disabled="true"]{opacity:.45;cursor:default;pointer-events:none}
+.hl-card{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-top:var(--rule-hair) solid var(--color-divider)}
+.hl-card-title{font-family:var(--font-heading);font-weight:600;font-stretch:var(--lead-stretch);font-size:26px;line-height:var(--leading-snug)}
+.hl-card-body{font-family:var(--font-body);font-size:var(--text-body);line-height:var(--leading-body);color:var(--color-text-muted)}
+.hl-record{background:var(--hl-cream);color:var(--hl-navy);padding:var(--space-8);display:flex;flex-direction:column;gap:20px}
+.hl-record .hl-eyebrow{color:var(--hl-text-faint-on-cream)}
+.hl-record-figure{font-family:var(--font-heading);font-weight:600;font-stretch:var(--headline-stretch);font-size:clamp(64px,7vw,96px);line-height:.95;letter-spacing:var(--tracking-display);font-feature-settings:"lnum" 1}
+.hl-record-caption{font-family:var(--font-body);font-size:21px;line-height:1.55;color:var(--hl-text-body-on-cream);max-width:var(--measure-lead)}
+.hl-record-body{font-family:var(--font-body);font-size:18px;line-height:var(--leading-body);color:var(--hl-text-muted-on-cream);max-width:var(--measure-body)}
+:focus-visible{outline:2px solid var(--hl-gold);outline-offset:2px}
+::selection{background:var(--hl-gold);color:var(--hl-navy)}
+
+</style>
+<style>
+body{margin:0;background:#0A1628}
+a{color:#F5F3ED}a:hover{color:#E9D58E}
+</style>
+</head>
+<body>
+<div id="top" style="font-family: var(--font-body); color: #F5F3ED; background: #0A1628; display: flex; flex-direction: column; width: 100%; min-width: 0">
+
+<header style="border-bottom: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 24px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+    <a href="#top" style="font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: 24px; line-height: 1; color: #F5F3ED; text-decoration: none">HubLab</a>
+    <nav aria-label="Primary" style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--font-ui); font-size: 15px; font-weight: 500">
+      <a href="#why" style="color: #C3C9D2; text-decoration: none">Why HubLab</a>
+      <a href="#model" style="color: #C3C9D2; text-decoration: none">The model</a>
+      <a href="#record" style="color: #C3C9D2; text-decoration: none">The record</a>
+      <a href="#certainty" style="color: #C3C9D2; text-decoration: none">CERTAiNTY</a>
+      <a href="#contact" style="color: #C3C9D2; text-decoration: none">Contact</a>
+    </nav>
+    <a class="hl-btn hl-btn-ghost" href="#contact">Start a conversation</a>
+  </div>
+</header>
+
+<section style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 120px clamp(20px, 5vw, 64px) 96px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 64px; align-items: end">
+  <div style="display: flex; flex-direction: column; gap: 32px; min-width: 0">
+    <div class="hl-eyebrow">Australia's regulatory intelligence layer</div>
+    <h1 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(44px, 6.5vw, 88px); line-height: 1.02; letter-spacing: -0.02em; color: #F5F3ED; max-width: 10em; text-wrap: pretty">Definitive AI for regulated work.</h1>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    <p style="margin: 0; font-size: 20px; line-height: 1.55; color: #C3C9D2; max-width: 34em">Same input, same answer, every time. Every decision traced to the rule that made it. One accountable party. That is the difference between an answer and a record.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center">
+      <a class="hl-btn" href="#contact">Start a conversation</a>
+      <a class="hl-btn hl-btn-ghost" href="#why">See the difference</a>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid #22324B; min-width: 0">
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px; border-right: 1px solid #22324B">
+      <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A generative answer</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #AEB6C2">Probably clause 25.4. Ask again and it may say 25.6.</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px; background: #101E34">
+      <span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A definitive record</span>
+      <span style="font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 22px; line-height: 1.15; color: #F5F3ED">Clause 25.4. Same answer tomorrow. Signed by a person.</span>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="border-top: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 48px">
+    <div style="display: flex; flex-direction: column; gap: 24px; max-width: 720px">
+      <div class="hl-eyebrow">Why HubLab</div>
+      <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.02; letter-spacing: -0.015em; color: #F5F3ED">Four things the alternatives cannot give a CFO.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    </div>
+    <div style="display: flex; flex-direction: column; border-top: 1px solid #22324B">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 48px; padding: 40px 0; border-bottom: 1px solid #22324B">
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Deterministic, not probabilistic.</h3>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">HubLab</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">Definitive AI. Same input, same answer, every time, with clause-level traceability.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A generative tool</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #AEB6C2">A plausible answer that can change tomorrow, with no clause behind it.</p></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 48px; padding: 40px 0; border-bottom: 1px solid #22324B">
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">A record, not a report.</h3>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">HubLab</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">A person signs off every finding. The audit record is yours and a regulator can follow it.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A consultancy</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #AEB6C2">A point-in-time review and a deck. The rules change the week after it lands.</p></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 48px; padding: 40px 0; border-bottom: 1px solid #22324B">
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">Above your systems, not instead of them.</h3>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">HubLab</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">We sit above the systems you run. No rip and replace. Hosted in Australia, segregated per customer.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A platform migration</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #AEB6C2">Eighteen months of change before the first obligation is read.</p></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 48px; padding: 40px 0; border-bottom: 1px solid #22324B">
+        <h3 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 102%; font-size: 26px; line-height: 1.15; color: #F5F3ED">One accountable party.</h3>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">HubLab</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2">Local team. Global engine. You bring the obligation; we own the outcome, from discovery to live production.</p></div>
+        <div style="display: flex; flex-direction: column; gap: 8px"><span style="font-family: var(--font-ui); font-size: 13px; font-weight: 500; letter-spacing: 0.02em; color: #8F98A6">A vendor, an integrator and an adviser</span><p style="margin: 0; font-size: 17px; line-height: 1.6; color: #AEB6C2">Three contracts, each pointing at the other when the regulator writes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model" style="background: #101E34; border-top: 1px solid #22324B; border-bottom: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 64px; align-items: start">
+    <div style="display: flex; flex-direction: column; gap: 24px">
+      <div class="hl-eyebrow">Three parties, one accountable</div>
+      <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; color: #F5F3ED">Local team. Global engine.</h2>
+      <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2; max-width: 62ch">Labrynth is the engine, built in the United States and proven in government there, exclusive to HubLab in Australia. HubLab is the local layer. Hubify (ASX: HFY) is the strategic investor and operational partner.</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 32px">
+      <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">The engine</div><div class="hl-card-body">Labrynth, the regulatory intelligence engine. A founding partner, not a vendor.</div></div>
+      <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">The layer</div><div class="hl-card-body">HubLab, your local experts and execution team. We find the real problem, build for Australian rules and own the outcome.</div></div>
+      <div class="hl-card"><div role="presentation" style="height:2px;width:48px;background:#D4AF37"></div><div class="hl-card-title">You</div><div class="hl-card-body">Your business, your ways of working and your compliance obligations. The record stays yours.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="hl-record" id="record"><div class="hl-eyebrow" style="color:var(--hl-text-faint-on-cream)">Not a roadmap. A record.</div><div class="hl-record-figure">188 days to 8</div><div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div><p class="hl-record-caption">Planning permits in Lancaster, California, on the same engine. In Australia, 80,000+ shifts validated in live production for a national facilities services group.</p><p class="hl-record-body">Not a roadmap. A record. Every number here is from live production, and the only ones we quote.</p></section>
+
+<section id="certainty" style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 96px clamp(20px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 64px; align-items: start">
+  <div style="display: flex; flex-direction: column; gap: 24px">
+    <div class="hl-eyebrow">First live in payroll</div>
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; color: #F5F3ED">CERTAiNTY certifies every pay run before it locks, and insurance stands behind the result.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+  </div>
+  <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2; max-width: 62ch">The first insurance-backed payroll assurance in Australia. By HubLab, powered by Labrynth, supported with Hubify. Since January 2025 deliberate underpayment has been a criminal offence, with personal exposure for directors; the record is what stands between a CFO and that exposure.</p>
+</section>
+
+<section id="contact" style="border-top: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 120px clamp(20px, 5vw, 64px); display: flex; flex-direction: column; gap: 32px">
+    <h2 style="margin: 0; font-family: var(--font-heading); font-weight: 600; font-stretch: 104%; font-size: clamp(34px, 4.2vw, 52px); line-height: 1.02; letter-spacing: -0.015em; color: #F5F3ED; max-width: 16em; text-wrap: pretty">The first conversation is about the problem, not a proposal.</h2>
+    <div role="presentation" style="height:2px;width:88px;background:#D4AF37"></div>
+    <p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C3C9D2; max-width: 62ch">Discovery in weeks, a working prototype you can touch, and a measured result before anything further is committed.</p>
+    <a class="hl-btn" href="mailto:enquiries@hublab.com.au">Start a conversation</a>
+  </div>
+</section>
+
+<footer style="border-top: 1px solid #22324B">
+  <div style="max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box; padding: 24px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.02em; color: #8F98A6">
+    <span>HubLab Pty Ltd · ABN 11 682 982 592 · Camberwell VIC 3124</span>
+    <span>enquiries@hublab.com.au</span>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>
